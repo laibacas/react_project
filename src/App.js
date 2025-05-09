@@ -1,25 +1,23 @@
-import logo from './logo.svg';
+import Home from './pages/home';
+import About from './pages/about';
+import Contact from './pages/contact';
+import Sidebar from './components/sidebar';
+import { Route,Routes } from 'react-router-dom';
 import './App.css';
+import React, { useState } from 'react';
 
-function App() {
+export default function App() {
+  const [isOpen, setIsOpen] = useState(true);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ display: 'flex' }}>
+      <Sidebar isOpen={isOpen} toggle={() => setIsOpen(!isOpen)} />
+      <div style={{ marginLeft: isOpen ? 200 : 60, padding: 20, flex: 1 }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </div>
     </div>
-  );
+  )
 }
-
-export default App;
